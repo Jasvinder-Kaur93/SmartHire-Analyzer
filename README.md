@@ -31,14 +31,14 @@ An AI-powered Resume Screening System that analyzes resumes and matches them wit
 ---
 
 ## 📷 Screenshots
-(Add screenshots here)
+
 
 ---
 
 ## ⚙️ How to Run Locally
 
 ```bash
-git clone https://github.com/your-username/SmartHire-Analyzer
+git clone https://github.com/Jasvinder-Kaur93/SmartHire-Analyzer
 cd SmartHire-Analyzer
 pip install -r requirements.txt
 streamlit run app.py
