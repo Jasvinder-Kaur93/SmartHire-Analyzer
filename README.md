@@ -1,57 +1,44 @@
-# 📄 Smart Hire Analyzer
+# 🚀 SmartHire Analyzer
 
-An **offline AI-powered Resume Screening (ATS) System** built using Python and Streamlit.  
-It analyzes resumes, extracts skills, calculates ATS match score, and provides recruiter-style insights.
-
----
-
-## 🚀 Features
-
-- 📄 Upload Resume (PDF / DOCX)
-- 🧠 Extracts skills automatically
-- 👤 Extracts candidate name, email, phone
-- 💼 Detects experience
-- 📊 ATS Match Score using AI (TF-IDF)
-- 📈 Visual analytics (Pie chart)
-- 💾 Stores candidate data in SQLite database
-- 🎨 Modern dark UI with custom styling
-- ⚡ Fully offline working system
+An AI-powered Resume Screening System that analyzes resumes and matches them with job descriptions using NLP and machine learning.
 
 ---
 
-## 🏗️ Project Structure
-smart_hire_analyzer/
-│
-├── app.py
-├── requirements.txt
-│
-├── backend/
-│ ├── parser.py
-│ ├── matcher.py
-│ ├── skills.py
-│ └── database.py
-│
-├── frontend/
-│ └── styles.css
-│
-├── database/
-│ └── smart_hire.db
-│
-└── uploads/
+## 📌 Features
+- 📄 Upload Resume (PDF/DOCX)
+- 🧠 Extract Skills automatically
+- 📊 ATS Score calculation
+- 📈 Job Match using TF-IDF
+- 🗂️ Candidate database storage
+- 📥 Download analysis report
 
+---
 
 ## 🛠️ Tech Stack
+- Python
+- Streamlit
+- spaCy (lightweight mode)
+- Scikit-learn
+- Pandas
+- Plotly
+- SQLite
 
-- Python 🐍
-- Streamlit 🎯
-- spaCy 🤖
-- Scikit-learn 📊
-- SQLite 🗄️
-- Plotly 📈
-- PDFMiner / python-docx 📄
+---
 
-## ⚙️ Installation
+## 🚀 Live Demo
+(Add your Streamlit link here)
 
-### 1️⃣ Clone or Download Project
+---
+
+## 📷 Screenshots
+(Add screenshots here)
+
+---
+
+## ⚙️ How to Run Locally
+
 ```bash
-cd smart_hire_analyzer
+git clone https://github.com/your-username/SmartHire-Analyzer
+cd SmartHire-Analyzer
+pip install -r requirements.txt
+streamlit run app.py
