@@ -3,14 +3,13 @@ import spacy
 from pdfminer.high_level import extract_text
 from docx import Document
 import spacy
+import spacy.cli
 
 try:
     nlp = spacy.load("en_core_web_sm")
 except:
-    import spacy.cli
     spacy.cli.download("en_core_web_sm")
     nlp = spacy.load("en_core_web_sm")
-nlp = spacy.load("en_core_web_sm")
 
 
 def extract_text_from_pdf(file):
