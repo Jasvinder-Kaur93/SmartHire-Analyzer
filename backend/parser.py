@@ -3,37 +3,28 @@ import spacy
 from pdfminer.high_level import extract_text
 from docx import Document
 
-# ✅ Cloud-safe NLP (no model dependency)
+# Cloud-safe NLP (NO MODEL)
 nlp = spacy.blank("en")
 
 
-# ----------------------------
-# PDF TEXT EXTRACTION
-# ----------------------------
 def extract_text_from_pdf(file):
     return extract_text(file)
 
 
-# ----------------------------
-# DOCX TEXT EXTRACTION
-# ----------------------------
 def extract_text_from_docx(file):
     doc = Document(file)
     return "\n".join([p.text for p in doc.paragraphs])
 
 
-# ----------------------------
-# CONTACT INFO EXTRACTION
-# ----------------------------
 def extract_contact_info(text):
 
     email = re.findall(r'\S+@\S+', text)
     phone = re.findall(r'\+?\d[\d -]{8,}\d', text)
 
-    # Simple name extraction fallback (spaCy blank model can't detect PERSON)
+    # Simple name guess
     name = None
-
     lines = text.split("\n")
+
     for line in lines[:10]:
         words = line.strip().split()
         if 1 < len(words) <= 4:
@@ -48,15 +39,8 @@ def extract_contact_info(text):
     }
 
 
-# ----------------------------
-# EXPERIENCE EXTRACTION
-# ----------------------------
 def extract_experience(text):
-
     pattern = r'(\d+)\+?\s+years'
     matches = re.findall(pattern, text.lower())
 
-    if matches:
-        return max(matches)
-
-    return "0"
+    return max(matches) if matches else "0"
