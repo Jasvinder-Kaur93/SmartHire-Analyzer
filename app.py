@@ -129,9 +129,9 @@ if analyze:
         experience_score = 0
 
     final_score = round(
-        (0.4 * skills_score) +
+        (0.5 * skills_score) +
         (0.2 * experience_score) +
-        (0.4 * keyword_score),
+        (0.3 * keyword_score),
         2
     )
 
