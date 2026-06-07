@@ -2,72 +2,61 @@ import re
 import spacy
 from pdfminer.high_level import extract_text
 from docx import Document
-import spacy
-import spacy.cli
 
-try:
-    nlp = spacy.load("en_core_web_sm")
-except:
-    spacy.cli.download("en_core_web_sm")
-    nlp = spacy.load("en_core_web_sm")
+# ✅ Cloud-safe NLP (no model dependency)
+nlp = spacy.blank("en")
 
 
+# ----------------------------
+# PDF TEXT EXTRACTION
+# ----------------------------
 def extract_text_from_pdf(file):
     return extract_text(file)
 
 
+# ----------------------------
+# DOCX TEXT EXTRACTION
+# ----------------------------
 def extract_text_from_docx(file):
-
     doc = Document(file)
-
-    return "\n".join(
-        [p.text for p in doc.paragraphs]
-    )
+    return "\n".join([p.text for p in doc.paragraphs])
 
 
+# ----------------------------
+# CONTACT INFO EXTRACTION
+# ----------------------------
 def extract_contact_info(text):
 
-    email = re.findall(
-        r'\S+@\S+',
-        text
-    )
+    email = re.findall(r'\S+@\S+', text)
+    phone = re.findall(r'\+?\d[\d -]{8,}\d', text)
 
-    phone = re.findall(
-        r'\+?\d[\d -]{8,}\d',
-        text
-    )
-
+    # Simple name extraction fallback (spaCy blank model can't detect PERSON)
     name = None
 
-    doc = nlp(text)
-
-    for ent in doc.ents:
-
-        if ent.label_ == "PERSON":
-            name = ent.text
-            break
+    lines = text.split("\n")
+    for line in lines[:10]:
+        words = line.strip().split()
+        if 1 < len(words) <= 4:
+            if all(w.isalpha() for w in words):
+                name = line.strip()
+                break
 
     return {
-
         "name": name if name else "Not Found",
-
-        "email": (
-            email[0]
-            if email else "Not Found"
-        ),
-
-        "phone": (
-            phone[0]
-            if phone else "Not Found"
-        )
+        "email": email[0] if email else "Not Found",
+        "phone": phone[0] if phone else "Not Found"
     }
-def extract_experience(text):
-    pattern = r'(\d+)\+?\s+years'
 
-    matches = re.findall(
-        pattern,
-        text.lower()
-    )
+
+# ----------------------------
+# EXPERIENCE EXTRACTION
+# ----------------------------
+def extract_experience(text):
+
+    pattern = r'(\d+)\+?\s+years'
+    matches = re.findall(pattern, text.lower())
+
     if matches:
         return max(matches)
+
     return "0"
