@@ -26,7 +26,7 @@ An AI-powered Resume Screening System that analyzes resumes and matches them wit
 ---
 
 ## 🚀 Live Demo
-(Add your Streamlit link here)
+https://jasvinder-kaur93-smarthire-analyzer-app-jlbc4v.streamlit.app/
 
 ---
 
